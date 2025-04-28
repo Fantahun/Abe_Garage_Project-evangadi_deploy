@@ -12,7 +12,7 @@ const corsOptions = {
   optionsSuccessStatus: 200
 };
 // Create a variable to hold our port number 
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 // Import the router 
 const router = require('./routes');
 // Create the webserver 
