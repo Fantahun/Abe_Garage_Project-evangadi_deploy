@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // Import the logo image 
 import logo from '../../../assets/images/logo.png';
 // Import the login service to access the logout function
-import loginService from '../../../services/login.service';
+import {logOut} from '../../../services/login.service';
 // Import the custom context hook 
 import { useAuth } from '../../../Contexts/AuthContext';
 
@@ -15,9 +15,9 @@ function Header(props) {
   // console.log(useAuth());
 
   // Log out event handler function
-  const logOut = () => {
+  const logOutUser = () => {
     // Call the logout function from the login service 
-    loginService.logOut();
+    logOut();
     // Set the isLogged state to false 
     setIsLogged(false);
   }
@@ -72,7 +72,7 @@ function Header(props) {
                 <div className="search-btn"></div>
                 {isLogged ? (
                   <div className="link-btn">
-                    <Link to="/" className="theme-btn btn-style-one blue" onClick={logOut} >Log out</Link>
+                    <Link to="/" className="theme-btn btn-style-one blue" onClick={logOutUser} >Log out</Link>
                   </div>
                 ) : (
                   <div className="link-btn">

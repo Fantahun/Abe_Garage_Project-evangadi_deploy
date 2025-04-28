@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import loginService from '../../../services/login.service';
+import {logIn} from '../../../services/login.service';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ function LoginForm() {
     };
     console.log(formData);
     // Call the service
-    const loginEmployee = loginService.logIn(formData);
+    const loginEmployee = logIn(formData);
     console.log(loginEmployee);
     loginEmployee.then((response) => response.json())
       .then((response) => {
