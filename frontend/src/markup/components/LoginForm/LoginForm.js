@@ -32,7 +32,7 @@ function LoginForm() {
     }
     // Password has to be at least 6 characters long
     if (!employee_password || employee_password.length < 6) {
-      setPasswordError('Password must be at least 6 characters long');
+      setPasswordError('invalid credential');
       valid = false;
     } else {
       setPasswordError('');
@@ -96,12 +96,12 @@ function LoginForm() {
 
                     <div className="form-group col-md-12">
                       {serverError && <div className="validation-error" role="alert">{serverError}</div>}
-                      <input type="email" name="employee_email" value={employee_email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+                      <input type="email" name="employee_email" required value={employee_email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
                       {emailError && <div className="validation-error" role="alert">{emailError}</div>}
                     </div>
 
                     <div className="form-group col-md-12">
-                      <input type="password" name="employee_password" value={employee_password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+                      <input type="password" name="employee_password"  required value={employee_password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
                       {passwordError && <div className="validation-error" role="alert">{passwordError}</div>}
                     </div>
 

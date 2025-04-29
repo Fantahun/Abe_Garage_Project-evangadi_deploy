@@ -36,6 +36,15 @@ function App() {
     <>
       <Header />
       <Routes>
+        {/* KEY FOR ROLES
+        - Adm: 3  - Manag: 2  - Employee: 1 
+        */}
+          {/* 
+          (/admin/customers) - managers (2) and admins(3)
+          (/admin/orders) - Can be accessed by all employees
+          (/admin/add-employee) - admins only 
+            
+        */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
@@ -61,14 +70,7 @@ function App() {
               <AddEmployee />
             </PrivateAuthRoute>
           } />
-        {/* 
-          Customers (/admin/customers) - managers and admins
-          Orders (/admin/orders) - Can be accessed by all employees
-          Add employee (/admin/add-employee) - admins only 
-            - Admin: 3 
-            - Manager: 2 
-            - Employee: 1 
-        */}
+      
       </Routes>
       <Footer />
     </>
