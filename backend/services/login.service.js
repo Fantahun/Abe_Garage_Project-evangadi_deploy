@@ -20,7 +20,7 @@ async function logIn(employeeData) {
     if (!passwordMatch) {
       returnData = {
         status: "fail",
-        message: "Email or password is incorrect"
+        message: "Invalid Credential! Please try again with the correct credentials."
       };
       return returnData;
     }

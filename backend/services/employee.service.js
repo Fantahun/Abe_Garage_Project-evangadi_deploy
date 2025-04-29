@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 async function checkIfEmployeeExists(email) {
   const query = "SELECT * FROM employee WHERE employee_email = ? ";
   const rows = await conn.query(query, [email]);
-  console.log(rows);
   if (rows.length > 0) {
     return true;
   }
@@ -24,7 +23,6 @@ async function createEmployee(employee) {
     // Insert the email in to the employee table  
     const query = "INSERT INTO employee (employee_email, active_employee) VALUES (?, ?)";
     const rows = await conn.query(query, [employee.employee_email, employee.active_employee]);
-    console.log(rows);
     if (rows.affectedRows !== 1) {
       return false;
     }
@@ -50,8 +48,14 @@ async function createEmployee(employee) {
 
 // A function to get employee by email
 async function getEmployeeByEmail(employee_email) {
-  const query = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_pass ON employee.employee_id = employee_pass.employee_id WHERE employee.employee_email = ?";
-  const query2 = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_pass ON employee.employee_id = employee_pass.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id WHERE employee.employee_email = ?";
+  const query = `SELECT emp.employee_id, emp.employee_email, ep.employee_password_hashed, 
+       ei.employee_first_name, ei.employee_last_name, er.company_role_id 
+FROM employee emp 
+INNER JOIN employee_info ei ON emp.employee_id = ei.employee_id 
+INNER JOIN employee_pass ep ON emp.employee_id = ep.employee_id 
+INNER JOIN employee_role er ON emp.employee_id = er.employee_id
+WHERE emp.employee_email = ?;
+`;
   const rows = await conn.query(query, [employee_email]);
   return rows;
 }
