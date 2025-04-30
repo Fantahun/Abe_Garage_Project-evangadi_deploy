@@ -59,15 +59,19 @@ function LoginForm() {
             // console.log(response.data);
             setIsLogged(true);
             localStorage.setItem("employee", JSON.stringify(response.data));
+
+            //navigate to the dashboard
+            navigate('/admin');
           }
-          
-            if (isAdmin) {
-              // Redirect the user to the dashboard
-              navigate('/admin');
-            } else {
-              // Redirect the user to the dashboard
-              navigate('/');
-            }
+          // TODO: check if the user is admin or not and redirect accordingly
+          // if (isAdmin) {
+            //   // Redirect the user to the dashboard
+            //   navigate('/admin');
+            // } 
+            // else {
+            //   // Redirect the user to the dashboard
+            //   navigate('/');
+            // }
           
         } else {
           // Show an error message
@@ -106,7 +110,7 @@ function LoginForm() {
                     </div>
 
                     <div className="form-group col-md-12">
-                      <button className="theme-btn btn-style-one" type="submit" data-loading-text="Please wait..."><span>Login</span></button>
+                      <button className="theme-btn btn-style-one" type="submit" data-loading-text="Please wait..." style={{backgroundColor:"#08194a", borderRadius:"5px"}}><span>Login</span></button>
                     </div>
                   </div>
                 </form>
