@@ -12,7 +12,7 @@ async function logIn(employeeData) {
     if (employee.length === 0) {
       returnData = {
         status: "fail",
-        message: "Employee does not exist"
+        message: "Either the email or password is incorrect! Please try again with the correct credentials."
       };
       return returnData;
     }
