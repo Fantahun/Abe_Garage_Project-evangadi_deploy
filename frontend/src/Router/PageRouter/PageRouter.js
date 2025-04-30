@@ -23,6 +23,8 @@ import Footer from "./../../markup/components/General/Footer/Footer";
 
 // Import the PrivateAuthRoute component
 import PrivateAuthRoute from "./../../markup/components/Auth/PrivateAuthRoute";
+import AdminLayout from "../../markup/components/AdminLayout/AdminLayout";
+import Dashboard from "../../markup/components/Admin/Dashboard/Dashboard";
 
 function PageRouter() {
   return (
@@ -39,18 +41,21 @@ function PageRouter() {
             
         */}
         <Route path="/" element={<Home />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
+        {/* // Add the Admin Dashboard Route  */}
+        <Route path="/admin" element={<PrivateAuthRoute roles={[3]}><AdminLayout><Dashboard /></AdminLayout></PrivateAuthRoute>} /> 
         {/* // Add the Orders Route  */}
         <Route
           path="/admin/orders"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
-              <Orders />
+              <AdminLayout><Orders /></AdminLayout>
             </PrivateAuthRoute>
           }
         />
@@ -60,18 +65,20 @@ function PageRouter() {
           path="/admin/customers"
           element={
             <PrivateAuthRoute roles={[2, 3]}>
-              <Customers />
+              <AdminLayout><Customers /></AdminLayout>
             </PrivateAuthRoute>
           }
         />
 
         {/* // Add the Employees Route  */}
-        <Route path="/admin/employees" element={<Employees />} />
+        <Route path="/admin/employees" element={<AdminLayout><Employees /></AdminLayout>} />
         <Route
           path="/admin/add-employee"
           element={
             <PrivateAuthRoute roles={[3]}>
-              <AddEmployee />
+              <AdminLayout>
+                <AddEmployee />
+              </AdminLayout>
             </PrivateAuthRoute>
           }
         />

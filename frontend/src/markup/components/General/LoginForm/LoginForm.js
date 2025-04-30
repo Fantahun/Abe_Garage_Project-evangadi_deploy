@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import {logIn} from '../../../../services/login.service';
+import getAuth from '../../../../util/auth';
+import { useAuth } from '../../../../Contexts/AuthContext';
 
 function LoginForm() {
+  const { isLogged, setIsLogged, employee,isAdmin } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
   const [employee_email, setEmail] = useState('');
   const [employee_password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [serverError, setServerError] = useState('');
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle client side validations here 
@@ -56,19 +57,18 @@ function LoginForm() {
           // Save the user in the local storage
           if (response.data.employee_token) {
             // console.log(response.data);
+            setIsLogged(true);
             localStorage.setItem("employee", JSON.stringify(response.data));
           }
-          // Redirect the user to the dashboard
-          // navigate('/admin');
-          // console.log(location);
-          if (location.pathname === '/login') {
-            // navigate('/admin');
-            // window.location.replace('/admin');
-            // To home for now 
-            window.location.replace('/');
-          } else {
-            window.location.reload();
-          }
+          
+            if (isAdmin) {
+              // Redirect the user to the dashboard
+              navigate('/admin');
+            } else {
+              // Redirect the user to the dashboard
+              navigate('/');
+            }
+          
         } else {
           // Show an error message
           setServerError(response.message);
