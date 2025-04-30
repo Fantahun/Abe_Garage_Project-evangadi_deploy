@@ -2,7 +2,7 @@ import React from "react";
 // Import the auth hook 
 import { useAuth } from "../../../Contexts/AuthContext";
 // Import the Login component 
-import LoginForm from '../../components/LoginForm/LoginForm';
+import LoginForm from '../../components/General/LoginForm/LoginForm';
 
 function Employees() {
   // Destructure the auth hook 
